@@ -3,7 +3,7 @@
     import user from '../user';
     $: isLoggedIn = $user === null? false : true;
 
-    const logout = async()=>{
+    const logout = async() => {
         await fetch('http://localhost:3030/api/logout',{
             method: "POST",
             credentials: 'include',
@@ -11,10 +11,11 @@
                 'Accept': 'application/json',
                 'content-type':  'application/json',
             }
-        })
+        });
         user.update(val => val = null);
         await goto('/',{noScroll: false,replaceState: true});
     }
+
 
 </script>
 

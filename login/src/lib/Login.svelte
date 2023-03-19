@@ -1,43 +1,42 @@
 <script>
-    import user from '../user';
-    let username ='';
-    let password = '';
-    let currentError = null;
+  import { onMount } from 'svelte';
+  import { post } from '../utils/api';
+  import user from '../user';
 
-    const login = ()=>{
-        fetch('http://127.0.0.1:3030/login',{
-            method: 'POST',
-            headers:{
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({username:username,password:password})
+  let username = '';
+  let password = '';
+  let currentError = null;
 
-        })
-        .then((res)=>{
-            if(res.status < 299) return res.json()
-            if(res.status > 299) currentError = "Something not quite right with server response";
-        })
-        .then((data)=>{
-            if(data) user.update(val => val = {...data})
-        })
-        .catch((error)=>{
-            currentError = error;
-            console.log("Error loggin in: ",error)
-        })
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    currentError = null;
+
+    try {
+      const { data } = await post('/login', { username, password });
+      user.update(val => ({ ...val, ...data }));
+    } catch (error) {
+      currentError = error.message;
+      console.error('Error logging in:', error);
     }
+  };
 
+  onMount(() => {
+    console.log('Login component mounted');
+  });
 </script>
 
-
-<form on:submit|preventDefault={login}>
-    <div>
-        <label for="username">Username</label>
-        <input type="text" id="username" bind:value={username}/>
-    </div>
-    <div>
-        <label for="password">Password</label>
-        <input type="password" id="password" bind:value={password}/>
-    </div>
-    <button type='submit'>Submit</button>
-
+<form on:submit={handleLogin}>
+  <div>
+    <label for="username">Username</label>
+    <input type="text" id="username" bind:value={username} />
+  </div>
+  <div>
+    <label for="password">Password</label>
+    <input type="password" id="password" bind:value={password} />
+  </div>
+  <button type="submit">Submit</button>
 </form>
+
+{#if currentError}
+  <p>{currentError}</p>
+{/if}

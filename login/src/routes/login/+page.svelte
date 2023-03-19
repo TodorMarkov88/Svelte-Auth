@@ -4,7 +4,7 @@
     let username = '';
     let password = '';
     let currentError = '';
-     let isLoading = false;
+    let isLoading = false;
 
     const login = ()=>{
            isLoading = true; 
