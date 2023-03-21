@@ -1,13 +1,13 @@
 <script context="module">
     import {goto} from '$app/navigation';
-       export let user;
+    
     let username = '';
     let password = '';
     let currentError = '';
-    let isLoading = false;
+ 
 
     const login = ()=>{
-           isLoading = true; 
+        
         fetch('http://localhost:3030/api/login',{
             method: "POST",
             credentials: 'include',
@@ -29,7 +29,7 @@
         })
         .then( async()=>{
              
-            isLoading = false;
+           
             await goto('/',{noScroll: false, replaceState: true})
         })
         .catch((error)=>{

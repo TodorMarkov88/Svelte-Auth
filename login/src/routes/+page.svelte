@@ -1,13 +1,22 @@
 <script>
+  import { onMount } from "svelte";
+  import user from "../user";
+
   export let data;
-  
-  $: isLoggedIn = data.returnedData && data.returnedData.success;
+  $: isLoggedIn = $user === null ? false : true;
+  onMount(async () => {
+    if (data.returnedData.success)
+      user.update((val) => (val = data.returnedData.data));
+  });
 </script>
 
 {#if isLoggedIn}
   <div class="content_wrapper">
     <h1>Welcome to Consulting Ninja</h1>
-    <h2>Thank you {data.returnedData.data.firstname} {data.returnedData.data.lastname} for logging in!</h2>
+    <h2>
+      Thank you {data.returnedData.data.firstname}
+      {data.returnedData.data.lastname} for logging in!
+    </h2>
   </div>
 {:else}
   <div class="content_wrapper">
@@ -18,7 +27,8 @@
 {/if}
 
 <style>
-  h1, h2 {
+  h1,
+  h2 {
     color: #FFF;
   }
   .content_wrapper {

@@ -2,10 +2,7 @@
     import Navbar from '../lib/Navbar.svelte';
 </script>
 
-<div class="main-content">
-    <Navbar />
-    <slot></slot>
-</div>
+ 
 
 
 <style>
@@ -13,5 +10,9 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
-</style>
+    } 
+    </style>
+<div class="main-content">
+    <Navbar  />
+    <slot></slot>
+</div>

@@ -1,9 +1,9 @@
 import {redirect} from "@sveltejs/kit"
 
 
-export async function load({ fetch}) {
+export async function load({ fetch,parent }) {
 
-
+ await parent()
   const userLoggedInStatus = async () => {
     const result = await fetch("http://localhost:3030/api/user", {
       method: "GET",
@@ -19,23 +19,10 @@ export async function load({ fetch}) {
   const returnedData = await result.json();
 
   if(returnedData.error===true ) throw redirect(303 ,'/login')
+  
   return {
     returnedData,
   };
 }
 
-// onMount(async () => {
-//     const result = await fetch('http://localhost:3030/api/user', {
-//         method: 'GET',
-//         credentials: 'include',
-//         headers: {
-//             'Accept': 'application/json',
-//             'content-type': 'application/json'
-//         }
-//     });
-
-//     const data = await result.json();
-
-//     user.update(val => val = data.data);
-//     isLoggedIn = data.success;
-// });
+ 
