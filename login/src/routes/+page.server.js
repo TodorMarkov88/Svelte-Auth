@@ -1,4 +1,4 @@
-import {redirect} from "@sveltejs/kit"
+ 
 
 
 export async function load({ fetch,parent }) {
@@ -18,7 +18,7 @@ export async function load({ fetch,parent }) {
   const result = await userLoggedInStatus();
   const returnedData = await result.json();
 
-  if(returnedData.error===true ) throw redirect(303 ,'/login')
+ 
   
   return {
     returnedData,

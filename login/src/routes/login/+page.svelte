@@ -1,13 +1,13 @@
 <script context="module">
     import {goto} from '$app/navigation';
-    
+   
     let username = '';
     let password = '';
     let currentError = '';
  
 
     const login = ()=>{
-        
+          
         fetch('http://localhost:3030/api/login',{
             method: "POST",
             credentials: 'include',
@@ -28,8 +28,7 @@
             if(data.error === true) throw new Error(data.message);
         })
         .then( async()=>{
-             
-           
+         
             await goto('/',{noScroll: false, replaceState: true})
         })
         .catch((error)=>{

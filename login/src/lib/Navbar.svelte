@@ -15,7 +15,7 @@
     });
     user.update((val) => (val = null));
 
-    await goto("/", { noScroll: false, replaceState: false });
+    await goto("/", { noScroll: false, replaceState: true });
   };
  
 </script>

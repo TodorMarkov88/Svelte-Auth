@@ -1,13 +1,12 @@
 <script>
-  import { onMount } from "svelte";
-  import user from "../user";
-
+  import { onMount } from 'svelte';
+  import user from '../user';
+  
   export let data;
-  $: isLoggedIn = $user === null ? false : true;
-  onMount(async () => {
-    if (data.returnedData.success)
-      user.update((val) => (val = data.returnedData.data));
-  });
+  $: isLoggedIn =  $user === null ? false : true;
+ onMount(async()=>{
+  if(data.returnedData.success) user.update(val=>val=data.returnedData.data)
+ })
 </script>
 
 {#if isLoggedIn}
