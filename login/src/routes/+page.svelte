@@ -5,7 +5,8 @@
   export let data;
   $: isLoggedIn =  $user === null ? false : true;
  onMount(async()=>{
-  if(data.returnedData.success) user.update(val=>val=data.returnedData.data)
+ 
+  if(data.returnedData.success ) user.update(val=>val=data.returnedData.data)
  })
 </script>
 
