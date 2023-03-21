@@ -18,12 +18,7 @@
       {data.returnedData.data.lastname} for logging in!
     </h2>
   </div>
-{:else}
-  <div class="content_wrapper">
-    <h1>Welcome to Consulting Ninja</h1>
-    <h2>You need to be logged in here.</h2>
-    <h2>Head to Sign in page or Register if you don't have an account.</h2>
-  </div>
+ 
 {/if}
 
 <style>
