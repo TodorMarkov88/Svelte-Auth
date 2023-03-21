@@ -21,7 +21,10 @@
 </script>
 
 <nav class="navbar">
+    {#if   isLoggedIn === true}  
   <a class="nav_link" href="/">Home</a>
+    
+ {/if}
  {#if   isLoggedIn === false}
  
     <a class="nav_link" href="/login">Login</a>
